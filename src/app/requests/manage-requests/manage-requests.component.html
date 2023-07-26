@@ -1,0 +1,43 @@
+<div class="card" style="margin-left: 100px">
+    <div>
+        <button style="background-color: green; color: white;" (click)="onFilterNotReplied()">Afficher les demandes non répondus</button>
+        <input style="margin-left: 100px;" type="text" [(ngModel)]="searchFullName" placeholder="Rechercher par nom" (input)="onSearch()" />
+        <span  class="badge">{{ unrepliedRequestsCount }}</span> <span> demandes à repondre</span>
+    </div>
+    <br>
+  <p-table [value]="filteredRequests" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Date de la demande</th>
+        <th>nom et prenom</th>
+        <th>email</th>
+        <th>Type demande</th>
+        <th>description</th>
+        <th>Action</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-request>
+      <tr>
+        <td>{{ request.date }}</td>
+        <td>{{ request.fullName }}</td>
+        <td>{{ request.email }}</td>
+        <td>{{ request.requestType }}</td>
+        <td>{{ request.description }}</td>
+        <td>
+            <ng-container *ngIf="!request.isReplied; else repliedText">
+              <p-button label="Répondre" (onClick)="onReplyClick(request)" class="p-button-text"></p-button>
+            </ng-container>
+            <ng-template #repliedText >
+                <h6 style="color: green;">Deja répondu</h6>
+              
+            </ng-template>
+            <div *ngIf="selectedRequest === request">
+              <textarea [(ngModel)]="replyMessage" placeholder="votre reponse" rows="5" ></textarea>
+              <p-button label="Confirmer" (onClick)="onSubmitReply()" class="p-button-raised p-button-success"></p-button>
+              <p-button label="Retour" (onClick)="onCancelReply()" class="p-button-raised p-button-secondary"></p-button>
+            </div>
+          </td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div>

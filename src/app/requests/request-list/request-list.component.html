@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="col-2">
+        <p-menu [model]="items"></p-menu>
+    </div>
+    <div class="card" class="col-10">
+        <p-table [value]="requests" [tableStyle]="{ 'min-width': '50rem' }">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>nom et prenom</th>
+                    <th>email</th>
+                    <th>Type demande</th>
+                    <th>description</th>
+                    <th>Action</th>
+                    <th>Etat</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-request>
+                <tr>
+                    <td>{{ request.fullName }}</td>
+                    <td>{{ request.email }}</td>
+                    <td>{{ request.requestType }}</td>
+                    <td>{{ request.description }}</td>
+                    <td>
+                        <button pButton (click)="onDeleteRequest(request._id)" style="background-color: red; color: white;">Supprimer</button>
+                    </td>
+                    <td>
+                        <ng-container *ngIf="request.isReplied; else waitingText">
+                          <p-button label="Afficher La reponse" (onClick)="onShowReplyClick(request)" class="p-button-text"></p-button>
+                        </ng-container>
+                        <ng-template #waitingText >
+                            <h6 style="color: orange;">En attente d'une réponse</h6>
+                          
+                        </ng-template>
+                        <div *ngIf="selectedRequest === request">
+                            <p>{{request.reply}}</p>
+                        </div>
+                      </td>
+                  </tr>
+                      
+            </ng-template>
+        </p-table>
+    </div>
+    
+</div>

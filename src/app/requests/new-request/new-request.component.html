@@ -1,0 +1,22 @@
+<div class="row">
+    <div class="col-4">
+        <p-menu [model]="items"></p-menu>
+    </div>
+    <div class="card flex justify-content-center" style="padding: 10px; margin-left: 100px;">
+        
+        <div class="card flex justify-content-center">
+            <input placeholder="nom et prenom" type="text" pInputText [(ngModel)]="request.fullName" />
+        </div>
+        <div class="card flex justify-content-center">
+            <input placeholder="email" type="text" pInputText [(ngModel)]="request.email" />
+        </div>
+        <div class="card flex justify-content-center">
+            <p-dropdown [options]="requestTypes" [(ngModel)]="request.requestType" placeholder="type de demande"></p-dropdown>
+            </div>
+        <div class="card flex justify-content-center">
+            <input placeholder="description" type="text" pInputText [(ngModel)]="request.description" />
+        </div>
+        <p-button (onClick)="saveRequest()" label="Submit"  
+        [disabled]="request.fullName=='' || request.requestType==''|| request.email==''|| request.description==''"></p-button>
+    </div>
+</div>

@@ -1,0 +1,22 @@
+
+
+  <p-toolbar >
+    <div class="p-toolbar-group-left" style="margin-left: 200px;">
+      <button
+      style="margin-right: 100px;"
+        pButton
+        label="Login en tant que User"
+        icon="pi pi-user"
+        (click)="connectAsUser()"
+        [ngClass]="{ 'connected': isConnectedAsUser }"
+      ></button>
+      <button
+        pButton
+        label="Login en tant que Agent"
+        icon="pi pi-users"
+        (click)="connectAsAgent()"
+        [ngClass]="{ 'connected': isConnectedAsAgent }"
+      ></button>
+    </div>
+  </p-toolbar>
+  
